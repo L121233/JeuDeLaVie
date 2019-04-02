@@ -12,7 +12,6 @@
  */
 public class Cellule {
     private CelluleEtat etat;
-    @SuppressWarnings("unused")
 	private int x, y;
 
     public Cellule(int x, int y, CelluleEtat etat) {
@@ -34,8 +33,14 @@ public class Cellule {
     }
 
     public int nombreVoisinesVivantes(JeuDeLaVie jeu) {
-      // à completer
-
-      return 0;
-    }
+    	int nbVV = 0;
+    	
+    	for(int i = this.x-1; i <= this.x+1; i++)
+    		for(int j = this.y-1; j <= this.y+1; j++)
+    	    	if((i >= 0 && i < jeu.getXMax()) && (j >= 0 && j < jeu.getYMax()))
+    	    		if(this != jeu.getGrilleXY(i,j) && jeu.getGrilleXY(i,j).estVivante())
+    					++nbVV; //*/
+    	
+    	return nbVV;
+	}
 }
