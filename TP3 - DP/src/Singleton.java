@@ -16,12 +16,11 @@ public class Singleton {
 
     /** Holder */
     private static class SingletonHolder {
-        /** Instance unique non préinitialisée */
-        private final static Singleton instance = new Singleton();
+        private final static Singleton INSTANCE = new Singleton();
     }
 
     /** Point d'accès pour l'instance unique du singleton */
     public static Singleton getInstance() {
-        return SingletonHolder.instance;
+        return SingletonHolder.INSTANCE;
     }
 }

@@ -11,23 +11,23 @@
  *
  */
 public class CelluleEtatMort implements CelluleEtat {
-    public static final CelluleEtatMort INSTANCE;
+    public static CelluleEtatMort INSTANCE;
 
     public CelluleEtat vit() {
-      return new CelluleEtatVivant.getInstance();
+    	return CelluleEtatMort.getInstance();
     }
 
     public CelluleEtat meurt() {
-      return this;
+    	return this;
     }
 
     public boolean estVivante() {
-      return false;
+    	return false;
     }
 
     public static final CelluleEtatMort getInstance() {
-      if(INSTANCE == null)
-        INSTANCE = new CelluleEtatMort();
-      return INSTANCE;
+    	if(INSTANCE == null)
+    		INSTANCE = new CelluleEtatMort();
+    	return INSTANCE;
     }
 }
