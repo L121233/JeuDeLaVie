@@ -1,3 +1,5 @@
+import java.lang.Math;
+import java.util.LinkedList;
 /**
  *
  *
@@ -8,12 +10,11 @@
 
 /**
  * 
- * 
+ *
  */
-import java.lang.Math;
-
-public class JeuDeLaVie {
+public class JeuDeLaVie implements Observable {
     private Cellule[][] grille;
+    private LinkedList<Observateur> observateurs;
     private int xMax = 5, yMax = xMax;
 
     public JeuDeLaVie() {
@@ -39,7 +40,20 @@ public class JeuDeLaVie {
     	return this.grille[x][y];
     }
     
-    public String toString() {
+    public void attacheObservateur(Observateur o) {
+    	this.observateurs.add(o);
+    }
+    
+    public void detacheObservateur(Observateur o) {
+    	this.observateurs.remove(o);
+    }
+    
+    public void notifieObservateur() {
+    	for(Observateur obs : observateurs)
+    		obs.actualise();
+    }
+    
+    /*public String toString() {
     	String phrase = "";
     	
     	for(int i = 0; i < xMax; i++) {
@@ -49,7 +63,7 @@ public class JeuDeLaVie {
 	        phrase += "\n";
     	}
     	return phrase;
-    }
+    } //*/
 
     public static void main(String[] args) {
     	int i = 2;
@@ -58,5 +72,5 @@ public class JeuDeLaVie {
 
     	System.out.println(jeu);
     	System.out.println("Nombre de cellules voisines vivantes pour la cellule["+i+"]["+i+"] : " + selection.nombreVoisinesVivantes(jeu));
-    }
+    } //*/
 }
