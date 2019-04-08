@@ -14,6 +14,7 @@ public class CommandeMeurt extends Commande {
 		this.cell = c; 
 	}
 	
+	@Override
 	public void executer() {
 		this.cell.meurt();
 	}

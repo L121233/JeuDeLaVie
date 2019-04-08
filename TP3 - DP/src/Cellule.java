@@ -43,4 +43,8 @@ public class Cellule {
     	
     	return nbVV;
 	}
+    
+    public void accepte(Visiteur visiteur) {
+    	this.etat.accepte(visiteur,this);
+    }
 }

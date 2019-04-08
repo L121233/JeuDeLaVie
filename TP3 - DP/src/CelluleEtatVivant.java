@@ -13,14 +13,17 @@
 public class CelluleEtatVivant implements CelluleEtat {
     public static CelluleEtatVivant INSTANCE;
 
+    @Override
     public CelluleEtat vit() {
     	return this;
     }
 
+    @Override
     public CelluleEtat meurt() {
     	return CelluleEtatVivant.getInstance();
     }
 
+    @Override
     public boolean estVivante() {
     	return true;
     }
@@ -29,5 +32,10 @@ public class CelluleEtatVivant implements CelluleEtat {
     	if(INSTANCE == null)
     		INSTANCE = new CelluleEtatVivant();
     	return INSTANCE;
+    }
+    
+    @Override
+    public void accepte(Visiteur visiteur, Cellule cell) {
+    	visiteur.visiteCelluleVivante(cell);
     }
 }
