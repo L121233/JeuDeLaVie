@@ -1,5 +1,6 @@
 import java.lang.Math;
 import java.util.LinkedList;
+
 /**
  *
  *
@@ -20,6 +21,7 @@ public class JeuDeLaVie implements Observable {
     public JeuDeLaVie() {
       this.grille = new Cellule[xMax][yMax];
       this.initialiseGrille();
+      this.observateurs = new LinkedList<Observateur>();
     }
     
     public int getXMax() {
@@ -40,37 +42,24 @@ public class JeuDeLaVie implements Observable {
     	return this.grille[x][y];
     }
     
-    public void attacheObservateur(Observateur o) {
-    	this.observateurs.add(o);
+    public void ajouterObservateur(Observateur obs) {
+    	this.observateurs.add(obs);
     }
     
-    public void detacheObservateur(Observateur o) {
-    	this.observateurs.remove(o);
+    public void supprimerObservateur(Observateur obs) {
+    	this.observateurs.remove(obs);
     }
     
-    public void notifieObservateur() {
+    public void notifierObservateur() {
     	for(Observateur obs : observateurs)
-    		obs.actualise();
+    		obs.actualiserVue();
     }
-    
-    /*public String toString() {
-    	String phrase = "";
-    	
-    	for(int i = 0; i < xMax; i++) {
-	        for(int j = 0; j < yMax; j++) {
-	        	phrase += (this.getGrilleXY(i,j).estVivante()) ? "O |" : "X |";
-	        }
-	        phrase += "\n";
-    	}
-    	return phrase;
-    } //*/
 
     public static void main(String[] args) {
-    	int i = 2;
 		JeuDeLaVie jeu = new JeuDeLaVie();
-    	Cellule selection = jeu.getGrilleXY(i,i);
-
-    	System.out.println(jeu);
-    	System.out.println("Nombre de cellules voisines vivantes pour la cellule["+i+"]["+i+"] : " + selection.nombreVoisinesVivantes(jeu));
-    } //*/
+		JeuDeLaVieUI vueJeu = new JeuDeLaVieUI(jeu);
+		
+		jeu.ajouterObservateur(vueJeu);
+		jeu.notifierObservateur();
+    }
 }

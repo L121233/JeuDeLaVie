@@ -11,7 +11,7 @@
  *
  */
 public interface Observable {
-	public void attacheObservateur(Observateur o);
-	public void detacheObservateur(Observateur o);
-	public void notifieObservateur();
+	public void ajouterObservateur(Observateur o);
+	public void supprimerObservateur(Observateur o);
+	public void notifierObservateur();
 }

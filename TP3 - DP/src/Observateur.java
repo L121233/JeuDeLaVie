@@ -11,5 +11,5 @@
  *
  */
 public interface Observateur {
-	public void actualise();
+	public void actualiserVue();
 }
