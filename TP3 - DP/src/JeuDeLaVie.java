@@ -15,12 +15,14 @@ import java.util.LinkedList;
  */
 public class JeuDeLaVie implements Observable {
     private Cellule[][] grille;
+    private LinkedList<Commande> commandes;
     private LinkedList<Observateur> observateurs;
     private int xMax = 5, yMax = xMax;
 
     public JeuDeLaVie() {
       this.grille = new Cellule[xMax][yMax];
       this.initialiseGrille();
+      this.commandes = new LinkedList<Commande>();
       this.observateurs = new LinkedList<Observateur>();
     }
     
@@ -40,6 +42,17 @@ public class JeuDeLaVie implements Observable {
     
     public Cellule getGrilleXY(int x, int y) {
     	return this.grille[x][y];
+    }
+    
+    public void ajouterCommande(Commande c) {
+    	this.commandes.add(c);
+    }
+    
+    public void executerCommandes() {
+    	for(Commande cmd : commandes) {
+    		cmd.executer();
+    		commandes.remove(cmd);
+    	}
     }
     
     public void ajouterObservateur(Observateur obs) {

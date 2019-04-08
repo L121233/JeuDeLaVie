@@ -39,7 +39,7 @@ public class Cellule {
     		for(int j = this.y-1; j <= this.y+1; j++)
     	    	if((i >= 0 && i < jeu.getXMax()) && (j >= 0 && j < jeu.getYMax()))
     	    		if(this != jeu.getGrilleXY(i,j) && jeu.getGrilleXY(i,j).estVivante())
-    					++nbVV; //*/
+    					++nbVV;
     	
     	return nbVV;
 	}
