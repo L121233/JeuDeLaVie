@@ -20,7 +20,7 @@ public class CelluleEtatVivant implements CelluleEtat {
 
     @Override
     public CelluleEtat meurt() {
-    	return CelluleEtatVivant.getInstance();
+    	return CelluleEtatMort.getInstance();
     }
 
     @Override

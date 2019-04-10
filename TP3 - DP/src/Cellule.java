@@ -21,11 +21,11 @@ public class Cellule {
     }
 
     public void vit() {
-    	this.etat = etat.vit();
+    	this.etat = this.etat.vit();
     }
 
     public void meurt() {
-    	this.etat = etat.meurt();
+    	this.etat = this.etat.meurt();
     }
 
     public boolean estVivante() {

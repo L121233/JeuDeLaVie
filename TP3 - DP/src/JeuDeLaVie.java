@@ -11,7 +11,7 @@ import java.util.LinkedList;
 
 /**
  * 
- *
+ * 
  */
 public class JeuDeLaVie implements Observable {
     private Cellule[][] grille;
@@ -75,18 +75,31 @@ public class JeuDeLaVie implements Observable {
 	        	this.grille[i][j].accepte(visiteur);
     }
     
+    public boolean toutEstMort() {
+    	int nbVivants = 0;
+    	
+    	for(int i = 0; i < xMax; i++)
+	        for(int j = 0; j < yMax; j++)
+	        	if(this.grille[i][j].estVivante())
+	        		++nbVivants;
+    	
+    	return (nbVivants == 0);
+    }
+    
     public void calculerGenerationSuivante() {
     	this.distribuerVisiteur();	// Étape n°1
     	this.executerCommandes();	// Étape n°2
     	this.notifierObservateur();	// Étape n°3
     }
 
-    public static void main(String[] args) {
+    @SuppressWarnings("unused")
+	public static void main(String[] args) {
 		JeuDeLaVie jeu = new JeuDeLaVie();
 		JeuDeLaVieUI vueJeu = new JeuDeLaVieUI(jeu);
 		
-		jeu.ajouterObservateur(vueJeu);
-		for(int i = 0; i < 1; i++)
+		while(!jeu.toutEstMort()) {
 			jeu.calculerGenerationSuivante();
+		}
+		System.out.println("Génération terminée : toutes les cellules sont mortes !");
     }
 }

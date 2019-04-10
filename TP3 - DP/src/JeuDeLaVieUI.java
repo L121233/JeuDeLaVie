@@ -20,17 +20,18 @@ public class JeuDeLaVieUI extends Canvas implements Observateur {
 	private JFrame fenetre;
 	private JeuDeLaVie jeu;
 	
-	public JeuDeLaVieUI(JeuDeLaVie j) {
-		fenetre = new JFrame();
-		fenetre.setSize(150,150);
-		jeu = j;
+	public JeuDeLaVieUI(JeuDeLaVie jeu) {
+		this.fenetre = new JFrame();
+		this.fenetre.setSize(150,150);
+		this.jeu = jeu;
+		this.jeu.ajouterObservateur(this);
 	}
 	
 	public void actualiserVue() {
 		try {
-			fenetre.add(this);
+			this.fenetre.add(this);
 			TimeUnit.SECONDS.sleep(1);
-			fenetre.setVisible(true);
+			this.fenetre.setVisible(true);
 		}
 		catch (InterruptedException e) {
 			// TODO Auto-generated catch block
