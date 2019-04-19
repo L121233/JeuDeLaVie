@@ -12,21 +12,21 @@ import javax.swing.JFrame;
  */
 
 /**
- * 
+ *
  *
  */
 @SuppressWarnings("serial")
 public class JeuDeLaVieUI extends Canvas implements Observateur {
 	private JFrame fenetre;
 	private JeuDeLaVie jeu;
-	
+
 	public JeuDeLaVieUI(JeuDeLaVie jeu) {
-		this.fenetre = new JFrame();
+		this.fenetre = (jeu.getVisiteur() instanceof VisiteurClassique) ? new JFrame("Classique") : new JFrame("Plus");
 		this.fenetre.setSize(150,150);
 		this.jeu = jeu;
 		this.jeu.ajouterObservateur(this);
 	}
-	
+
 	public void actualiserVue() {
 		try {
 			this.fenetre.add(this);
