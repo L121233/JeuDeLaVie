@@ -1,28 +1,34 @@
 import java.awt.*;
+import java.awt.event.*;
+
 import java.util.concurrent.TimeUnit;
-
-import javax.swing.JFrame;
-
 /**
  * Classe "JeuDeLaVieUI", qui implémente l'interface "Observateur". Son rôle est
  * de générer une interface graphique qui représentera chaque génération de cellules
  * créées et leur évolution.
- * L'utilisation de la classe "JFrame" est obligatoire pour réaliser cette tâche.
+ * L'utilisation de la classe "Frame" est obligatoire pour réaliser cette tâche.
  *
  * @author KAJAK Rémi
  */
 public class JeuDeLaVieUI extends Canvas implements Observateur {
-	private JFrame fenetre;
+	private Frame fenetre;
 	private JeuDeLaVie jeu;
 
 	/**
-	 * Constructeur par défaut de la classe courante.
+	 * Constructeur par défaut de la classe courante. Fermer l'observateur graphique
+	 * pendant son exécution permet d'interrompre le programme.
 	 *
 	 * @param	jeu	Une instance de la classe "JeuDeLaVie".
 	 */
 	public JeuDeLaVieUI(JeuDeLaVie jeu) {
-		this.fenetre = (jeu.getVisiteur() instanceof VisiteurClassique) ? new JFrame("Classique") : new JFrame("Plus");
+		this.fenetre = (jeu.getVisiteur() instanceof VisiteurClassique) ? new Frame("Classique") : new Frame("Plus");
 		this.fenetre.setSize(150,150);
+		this.fenetre.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
 		this.jeu = jeu;
 		this.jeu.ajouterObservateur(this);
 	}
@@ -47,7 +53,7 @@ public class JeuDeLaVieUI extends Canvas implements Observateur {
 	/**
 	 * Cette fonction permet de représenter les cellules vivantes dans la fenêtre
 	 * d'affichage sous forme de ronds noirs. Son appel est géré automatiquement
-	 * par la classe "JFrame".
+	 * par la classe "Frame".
 	 */
 	public void paint(Graphics g) {
 		for(int i = 0; i < jeu.getXMax(); i++)

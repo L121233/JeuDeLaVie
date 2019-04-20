@@ -206,5 +206,6 @@ public class JeuDeLaVie implements Observable {
     jeu.supprimerObservateur(vueGraphiqueJeu);
     jeu.supprimerObservateur(vueTexteJeu);
 		System.out.println("Population disparue : toutes les cellules sont mortes !");
+    System.exit(0);
   }
 }
