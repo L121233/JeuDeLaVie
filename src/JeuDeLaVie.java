@@ -44,7 +44,7 @@ public class JeuDeLaVie implements Observable {
   public void initialiseGrille() {
   	for(int i = 0; i < xMax; i++)
       for(int j = 0; j < yMax; j++)
-        this.grille[i][j] = (Math.random() <= 0.5)? new Cellule(i,j,new CelluleEtatVivant()) : new Cellule(i,j,new CelluleEtatMort());
+        this.grille[i][j] = (Math.random() <= 0.5)? new Cellule(i,j,CelluleEtatVivant.getInstance()) : new Cellule(i,j,CelluleEtatMort.getInstance());
   }
 
   public Cellule getGrilleXY(int x, int y) {
