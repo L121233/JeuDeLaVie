@@ -15,87 +15,87 @@ import java.util.Scanner;
  *
  */
 public class JeuDeLaVie implements Observable {
-    private Cellule[][] grille;
-    private LinkedList<Commande> commandes;
-    private LinkedList<Observateur> observateurs;
-    private Visiteur visiteur;
-    private int xMax = 5, yMax = xMax;
+  private Cellule[][] grille;
+  private LinkedList<Commande> commandes;
+  private LinkedList<Observateur> observateurs;
+  private Visiteur visiteur;
+  private int xMax = 5, yMax = xMax;
 
-    public JeuDeLaVie(int numVisiteur) {
-      this.grille = new Cellule[xMax][yMax];
-      this.initialiseGrille();
-      this.commandes = new LinkedList<Commande>();
-      this.observateurs = new LinkedList<Observateur>();
-      this.visiteur = (numVisiteur == 1) ? new VisiteurClassique(this) : new VisiteurPlus(this);
-    }
+  public JeuDeLaVie(int numVisiteur) {
+    this.grille = new Cellule[xMax][yMax];
+    this.initialiseGrille();
+    this.commandes = new LinkedList<Commande>();
+    this.observateurs = new LinkedList<Observateur>();
+    this.visiteur = (numVisiteur == 1) ? new VisiteurClassique(this) : new VisiteurPlus(this);
+  }
 
-    public Visiteur getVisiteur() {
-      return this.visiteur;
-    }
+  public Visiteur getVisiteur() {
+    return this.visiteur;
+  }
 
-    public int getXMax() {
-    	return this.xMax;
-    }
+  public int getXMax() {
+  	return this.xMax;
+  }
 
-    public int getYMax() {
-    	return this.yMax;
-    }
+  public int getYMax() {
+  	return this.yMax;
+  }
 
-    public void initialiseGrille() {
-    	for(int i = 0; i < xMax; i++)
-	        for(int j = 0; j < yMax; j++)
-	        	this.grille[i][j] = (Math.random() <= 0.5)? new Cellule(i,j,new CelluleEtatVivant()) : new Cellule(i,j,new CelluleEtatMort());
-    }
+  public void initialiseGrille() {
+  	for(int i = 0; i < xMax; i++)
+      for(int j = 0; j < yMax; j++)
+        this.grille[i][j] = (Math.random() <= 0.5)? new Cellule(i,j,new CelluleEtatVivant()) : new Cellule(i,j,new CelluleEtatMort());
+  }
 
-    public Cellule getGrilleXY(int x, int y) {
-    	return this.grille[x][y];
-    }
+  public Cellule getGrilleXY(int x, int y) {
+  	return this.grille[x][y];
+  }
 
-    public void ajouterCommande(Commande c) {
-    	this.commandes.add(c);
-    }
+  public void ajouterCommande(Commande c) {
+  	this.commandes.add(c);
+  }
 
-    public void executerCommandes() {
-    	for(Commande cmd : commandes)
-    		cmd.executer();
+  public void executerCommandes() {
+  	for(Commande cmd : commandes)
+      cmd.executer();
 		commandes.clear();
-    }
+  }
 
-    public void ajouterObservateur(Observateur obs) {
-    	this.observateurs.add(obs);
-    }
+  public void ajouterObservateur(Observateur obs) {
+  	this.observateurs.add(obs);
+  }
 
-    public void supprimerObservateur(Observateur obs) {
-    	this.observateurs.remove(obs);
-    }
+  public void supprimerObservateur(Observateur obs) {
+  	this.observateurs.remove(obs);
+  }
 
-    public void notifierObservateur() {
-    	for(Observateur obs : observateurs)
-    		obs.actualiserVue();
-    }
+  public void notifierObservateur() {
+  	for(Observateur obs : observateurs)
+  		obs.actualiserVue();
+  }
 
-    public void distribuerVisiteur() {
-    	for(int i = 0; i < xMax; i++)
-	        for(int j = 0; j < yMax; j++)
-	        	this.grille[i][j].accepte(visiteur);
-    }
+  public void distribuerVisiteur() {
+  	for(int i = 0; i < xMax; i++)
+      for(int j = 0; j < yMax; j++)
+        this.grille[i][j].accepte(visiteur);
+  }
 
-    public int nombreCellulesVivantes() {
-    	int nbCV = 0;
+  public int nombreCellulesVivantes() {
+  	int nbCV = 0;
 
-    	for(int i = 0; i < xMax; i++)
-	        for(int j = 0; j < yMax; j++)
-	        	if(this.grille[i][j].estVivante())
-	        		++nbCV;
+  	for(int i = 0; i < xMax; i++)
+      for(int j = 0; j < yMax; j++)
+        if(this.grille[i][j].estVivante())
+          ++nbCV;
 
-    	return nbCV;
-    }
+    return nbCV;
+  }
 
-    public void calculerGenerationSuivante() {
-    	this.distribuerVisiteur();	// Étape n°1
-    	this.executerCommandes();	// Étape n°2
-    	this.notifierObservateur();	// Étape n°3
-    }
+  public void calculerGenerationSuivante() {
+  	this.distribuerVisiteur();   // Étape n°1
+  	this.executerCommandes();    // Étape n°2
+  	this.notifierObservateur();  // Étape n°3
+  }
 
 	public static void main(String[] args) {
     Scanner lecture = new Scanner(System.in);
